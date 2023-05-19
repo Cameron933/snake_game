@@ -6,13 +6,30 @@ import { useState, useEffect } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const DIRECTIONS = {
+    L: "left",
+    R: "right",
+    U: "up",
+    D: "down",
+  };
+
   const [isGameStart, setIsGameStart] = useState<boolean>(true);
   const [isDead, setIsDead] = useState<boolean>(false);
+
+  const [snakePositionArray, setSnakePositionArray] = useState([]);
+  const [snakeTailPosition, setSnakeTailPosition] = useState();
+  const [snakeDirection, setSnakeDirection] = useState(DIRECTIONS.R);
+
+  const [foodPosition, setFoodPosition] = useState();
 
   useEffect(() => {
     if (!isGameStart) return;
 
-    //initGame();
+    const initGame = () => {
+      if (isGameStart) return;
+      setIsDead(false);
+      setIsGameStart(true);
+    };
 
     let gameInterval;
     // window.addEventListener("keydown", handleKeyDown);
@@ -29,7 +46,12 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {/* game title screen */}
-        {!isGameStart && isDead && <div>hi, snack game here</div>}
+        {!isGameStart && isDead && (
+          <div>
+            <h1>Snake Game</h1>
+            <button className="">Start Game</button>
+          </div>
+        )}
 
         <div className={styles.description}></div>
       </main>
