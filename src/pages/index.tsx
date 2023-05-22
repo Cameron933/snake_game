@@ -56,12 +56,15 @@ export default function Home() {
   const moveSnake = () => {
     setSnakeTailPosition(snakePositionArray.at(-1));
     const newSnakeHeadPosition = movePosition(snakePositionArray[0]);
-    const newSnakePositionArray = [newSnakeHeadPosition, snakePositionArray[1]];
+    const newSnakePositionArray = [
+      newSnakeHeadPosition,
+      ...snakePositionArray.slice(0, -1),
+    ];
 
-    setSnakePositionArray(newSnakePositionArray);
+    setSnakePositionArray(() => newSnakePositionArray);
   };
 
-  const isSnakeBlock = (position: number) =>
+  const isSnakeBlockByItself = (position: number) =>
     snakePositionArray.includes(position);
 
   const Apple = () => {};
