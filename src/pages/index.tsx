@@ -34,15 +34,31 @@ export default function Home() {
     .fill(null)
     .map((_, i) => i);
 
+  const movePosition = (position: number) => {
+    switch (snakeDirection) {
+      case DIRECTIONS.R:
+        position = position + 1;
+        break;
+      case DIRECTIONS.L:
+        position = position - 1;
+        break;
+      case DIRECTIONS.U:
+        position = position - 10;
+        break;
+      case DIRECTIONS.D:
+        position = position + 10;
+        break;
+      default:
+    }
+    return position;
+  };
+
+  const moveSnake = () => {};
+
   useEffect(() => {
     if (!isGameStart) return;
 
-    const initGame = () => {
-      if (isGameStart) return;
-      setIsDead(false);
-      setIsGameStart(true);
-    };
-
+    initGame();
     let gameInterval;
     // window.addEventListener("keydown", handleKeyDown);
     // gameIterval
@@ -61,7 +77,9 @@ export default function Home() {
         {!isGameStart && isDead && (
           <div>
             <h1>Snake Game</h1>
-            <button className="">Start Game</button>
+            <button className="" onClick={initGame}>
+              Start Game
+            </button>
           </div>
         )}
 
