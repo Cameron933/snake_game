@@ -66,8 +66,15 @@ export default function Home() {
 
   const isSnakeBlockByItself = (position: number) =>
     snakePositionArray.includes(position);
+  const handleIsDead = () => {};
 
-  const Apple = () => {};
+  const spawnFood = () => {};
+  const handleEatFood = () => {};
+  const isFoodBlock = () => {};
+
+  const handleKeyDown = () => {
+    // need to search keycode here
+  };
 
   useEffect(() => {
     if (!isGameStart) return;
