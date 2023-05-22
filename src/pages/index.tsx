@@ -17,7 +17,7 @@ export default function Home() {
   const [isDead, setIsDead] = useState<boolean>(false);
 
   const [snakePositionArray, setSnakePositionArray] = useState<number[]>([]);
-  const [snakeTailPosition, setSnakeTailPosition] = useState();
+  const [snakeTailPosition, setSnakeTailPosition] = useState<number>();
   const [snakeDirection, setSnakeDirection] = useState(DIRECTIONS.R);
 
   const [foodPosition, setFoodPosition] = useState();
@@ -53,7 +53,18 @@ export default function Home() {
     return position;
   };
 
-  const moveSnake = () => {};
+  const moveSnake = () => {
+    setSnakeTailPosition(snakePositionArray.at(-1));
+    const newSnakeHeadPosition = movePosition(snakePositionArray[0]);
+    const newSnakePositionArray = [newSnakeHeadPosition, snakePositionArray[1]];
+
+    setSnakePositionArray(newSnakePositionArray);
+  };
+
+  const isSnakeBlock = (position: number) =>
+    snakePositionArray.includes(position);
+
+  const Apple = () => {};
 
   useEffect(() => {
     if (!isGameStart) return;
