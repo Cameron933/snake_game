@@ -16,11 +16,23 @@ export default function Home() {
   const [isGameStart, setIsGameStart] = useState<boolean>(true);
   const [isDead, setIsDead] = useState<boolean>(false);
 
-  const [snakePositionArray, setSnakePositionArray] = useState([]);
+  const [snakePositionArray, setSnakePositionArray] = useState<number[]>([]);
   const [snakeTailPosition, setSnakeTailPosition] = useState();
   const [snakeDirection, setSnakeDirection] = useState(DIRECTIONS.R);
 
   const [foodPosition, setFoodPosition] = useState();
+
+  const initGame = () => {
+    if (isGameStart) return;
+    setIsDead(false);
+    setSnakePositionArray([12, 13]);
+    setSnakeDirection(DIRECTIONS.R);
+    setIsGameStart(true);
+  };
+
+  const gameBoardArray = Array(100)
+    .fill(null)
+    .map((_, i) => i);
 
   useEffect(() => {
     if (!isGameStart) return;
