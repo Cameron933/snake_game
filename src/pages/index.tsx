@@ -64,8 +64,6 @@ export default function Home() {
     setSnakePositionArray(() => newSnakePositionArray);
   };
 
-  const isSnakeBlockByItself = (position: number) =>
-    snakePositionArray.includes(position);
   const handleIsDead = () => {
     const isHitWalls =
       (snakePositionArray[0] % 10 === 9 && snakeDirection === "R") ||
@@ -87,8 +85,21 @@ export default function Home() {
     }
     setFoodPosition(newPosition);
   };
-  const handleEatFood = () => {};
-  const isFoodBlock = () => {};
+  const handleEatFood = () => {
+    if (snakePositionArray[0] !== foodPosition) return;
+    if (typeof snakeTailPosition !== "undefined") {
+      setSnakePositionArray((prevSnakePositionArray) => [
+        ...prevSnakePositionArray,
+        snakeTailPosition,
+      ]);
+    }
+  };
+
+  const isSnake = (position: number) => snakePositionArray.includes(position);
+
+  const isFood = (position: number) => {
+    return foodPosition === position && !isSnake(position);
+  };
 
   const handleKeyDown = () => {
     // need to search keycode here
