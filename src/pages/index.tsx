@@ -20,7 +20,7 @@ export default function Home() {
   const [snakeTailPosition, setSnakeTailPosition] = useState<number>();
   const [snakeDirection, setSnakeDirection] = useState(DIRECTIONS.R);
 
-  const [foodPosition, setFoodPosition] = useState();
+  const [foodPosition, setFoodPosition] = useState<number>();
 
   const initGame = () => {
     if (isGameStart) return;
@@ -66,9 +66,27 @@ export default function Home() {
 
   const isSnakeBlockByItself = (position: number) =>
     snakePositionArray.includes(position);
-  const handleIsDead = () => {};
+  const handleIsDead = () => {
+    const isHitWalls =
+      (snakePositionArray[0] % 10 === 9 && snakeDirection === "R") ||
+      (snakePositionArray[0] % 10 === 0 && snakeDirection === "L") ||
+      (snakePositionArray[0] < 10 && snakeDirection === "U") ||
+      (snakePositionArray[0] > 90 && snakeDirection === "D");
+    if (isHitWalls) {
+      setIsDead(true);
+      setSnakePositionArray([]);
+      setFoodPosition(11);
+      setIsGameStart(false);
+    }
+  };
 
-  const spawnFood = () => {};
+  const spawnFood = () => {
+    let newPosition = Math.floor(Math.random() * 99);
+    while (snakePositionArray.includes(newPosition)) {
+      newPosition = Math.floor(Math.random() * 99);
+    }
+    setFoodPosition(newPosition);
+  };
   const handleEatFood = () => {};
   const isFoodBlock = () => {};
 
