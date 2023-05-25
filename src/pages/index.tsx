@@ -131,9 +131,20 @@ export default function Home() {
     if (!isGameStart) return;
 
     initGame();
-    let gameInterval;
-    // window.addEventListener("keydown", handleKeyDown);
-    // gameIterval
+    let gameInterval: NodeJS.Timer | undefined;
+    window.addEventListener("keydown", handleKeyDown);
+    gameInterval = setInterval(() => {
+      moveSnake();
+      handleEatFood();
+      handleIsDead();
+    }, 300);
+
+    if (isDead) clearInterval(gameInterval);
+
+    return () => {
+      clearInterval(gameInterval);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   });
 
   return (
@@ -155,7 +166,11 @@ export default function Home() {
           </div>
         )}
 
+        {/* game over screen */}
         <div className={styles.description}></div>
+
+        {/* game play screen */}
+        <div></div>
       </main>
     </>
   );
