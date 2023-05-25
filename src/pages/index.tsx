@@ -66,10 +66,10 @@ export default function Home() {
 
   const handleIsDead = () => {
     const isHitWalls =
-      (snakePositionArray[0] % 10 === 9 && snakeDirection === "R") ||
-      (snakePositionArray[0] % 10 === 0 && snakeDirection === "L") ||
-      (snakePositionArray[0] < 10 && snakeDirection === "U") ||
-      (snakePositionArray[0] > 90 && snakeDirection === "D");
+      (snakePositionArray[0] % 10 === 9 && snakeDirection === "right") ||
+      (snakePositionArray[0] % 10 === 0 && snakeDirection === "lift") ||
+      (snakePositionArray[0] < 10 && snakeDirection === "up") ||
+      (snakePositionArray[0] > 90 && snakeDirection === "down");
     if (isHitWalls) {
       setIsDead(true);
       setSnakePositionArray([]);
@@ -101,8 +101,30 @@ export default function Home() {
     return foodPosition === position && !isSnake(position);
   };
 
-  const handleKeyDown = () => {
-    // need to search keycode here
+  const handleKeyDown = (event: any) => {
+    switch (event.keyCode) {
+      case 37:
+      case 65:
+        console.log("Move Left");
+        setSnakeDirection(DIRECTIONS.L);
+        break;
+      case 38:
+      case 87:
+        console.log("Move Up");
+        setSnakeDirection(DIRECTIONS.U);
+        break;
+      case 39:
+      case 68:
+        console.log("move right");
+        setSnakeDirection(DIRECTIONS.R);
+        break;
+      case 40:
+      case 83:
+        console.log("move down");
+        setSnakeDirection(DIRECTIONS.D);
+        break;
+      default:
+    }
   };
 
   useEffect(() => {
