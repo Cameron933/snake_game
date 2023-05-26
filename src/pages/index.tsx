@@ -167,7 +167,14 @@ export default function Home() {
         )}
 
         {/* game over screen */}
-        <div className={styles.description}></div>
+        {isDead && (
+          <div className={styles.game_message}>
+            <h1 className={styles.game_message__title}>Game Over</h1>
+            <button className={styles.game_message__restart} onClick={initGame}>
+              Try Again!
+            </button>
+          </div>
+        )}
 
         {/* game play screen */}
         <div></div>
