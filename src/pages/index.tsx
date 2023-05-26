@@ -157,10 +157,10 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {/* game title screen */}
-        {!isGameStart && isDead && (
-          <div>
-            <h1>Snake Game</h1>
-            <button className="" onClick={initGame}>
+        {!isGameStart && !isDead && (
+          <div className={styles.game_message}>
+            <h1 className={styles.game_message__title}>Snake Game</h1>
+            <button className={styles.game_message__start} onClick={initGame}>
               Start Game
             </button>
           </div>
@@ -170,14 +170,22 @@ export default function Home() {
         {isDead && (
           <div className={styles.game_message}>
             <h1 className={styles.game_message__title}>Game Over</h1>
-            <button className={styles.game_message__restart} onClick={initGame}>
+            <button className={styles.game_message__start} onClick={initGame}>
               Try Again!
             </button>
           </div>
         )}
 
         {/* game play screen */}
-        <div></div>
+        <section className={styles.snake_layer}>
+          {gameBoardArray.map((position) => {
+            return (
+              <div key={position} className={`${styles.snake_layer__blocks} `}>
+                &nbsp;
+              </div>
+            );
+          })}
+        </section>
       </main>
     </>
   );

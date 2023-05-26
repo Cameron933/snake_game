@@ -4,3 +4,52 @@
   height: min(90vh, 90vw);
 }
 
+.game_message {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 5;
+}
+
+.game_message__title {
+  font-size: 15vh;
+  text-align: center;
+}
+
+.game_message__start {
+  background-color: black;
+  color: white;
+  font-size: 7vh;
+}
+
+.game_message__start:hover {
+  color: gray;
+}
+
+.game_message__start:active {
+  color: black;
+  background-color: white;
+}
+
+.snake_layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.snake_layer__blocks {
+  display: inline-block;
+  width: 10%;
+  height: 10%;
+  margin: 0px;
+  padding: 0px;
+  background-color: yellow;
+  border: 1px solid black;
+}
