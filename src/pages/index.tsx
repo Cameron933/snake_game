@@ -13,7 +13,7 @@ export default function Home() {
     D: "down",
   };
 
-  const [isGameStart, setIsGameStart] = useState<boolean>(true);
+  const [isGameStart, setIsGameStart] = useState<boolean>(false);
   const [isDead, setIsDead] = useState<boolean>(false);
 
   const [snakePositionArray, setSnakePositionArray] = useState<number[]>([]);
@@ -177,15 +177,23 @@ export default function Home() {
         )}
 
         {/* game play screen */}
-        <section className={styles.snake_layer}>
-          {gameBoardArray.map((position) => {
-            return (
-              <div key={position} className={`${styles.snake_layer__blocks} `}>
-                &nbsp;
-              </div>
-            );
-          })}
-        </section>
+        {isGameStart && !isDead && (
+          <section className={styles.snake_layer}>
+            {gameBoardArray.map((position) => {
+              return (
+                <div
+                  key={position}
+                  className={`${styles.snake_layer__blocks} ${
+                    isSnake(position) && styles.snake_layer__snake_blocks
+                  } ${isFood(position) && styles.snake_layer__apple_block}
+                `}
+                >
+                  &nbsp;
+                </div>
+              );
+            })}
+          </section>
+        )}
       </main>
     </>
   );

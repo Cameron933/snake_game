@@ -50,6 +50,13 @@
   height: 10%;
   margin: 0px;
   padding: 0px;
-  background-color: yellow;
+  background-color: white;
   border: 1px solid black;
+}
+
+.snake_layer__snake_blocks {
+  background-color: greenyellow;
+}
+.snake_layer__apple_block {
+  background-color: red !important;
 }
